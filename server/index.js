@@ -3,8 +3,8 @@ import dotenv from "dotenv"
 import cors from "cors"
 import connectDB from "./config/db.js"
 import authRoutes from "./routes/auth.js"
-import eventRoutes from "./routes/events.js"
-import bookingRoutes from "./routes/booking.js"
+import eventRoutes from "./routes/event.js"
+// import bookingRoutes from "./routes/booking.js"
 
 
 dotenv.config({quiet:true})
@@ -19,7 +19,7 @@ app.use(express.json())
 
 app.use("/api/auth",authRoutes)
 app.use("/api/event",eventRoutes)
-app.use("/api/bookings",bookingRoutes)
+// app.use("/api/bookings",bookingRoutes)
 
 
 connectDB()

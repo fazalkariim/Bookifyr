@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { User } from "../models/user.js";
+import { User } from "../models/User.js";
 import {sendOTPEmail } from "../utils/email.js"
 import { OTP } from "../models/OTP.js";
 import bcrypt from "bcryptjs";

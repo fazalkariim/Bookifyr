@@ -1,5 +1,6 @@
 import  express from 'express'
 import {protect, admin} from "../middlewares/auth.js"
+import {getAllEvents,getEventsById,createEvent,updateEvent,deleteEvent} from "../controllers/eventController.js"
 
 const router = express.Router()
 
@@ -18,4 +19,4 @@ router.put("/:id",protect,admin, updateEvent);
 //Delete Events(admin only)
 router.put("/:id",protect,admin, deleteEvent);
 
-export {router}
+export default router
