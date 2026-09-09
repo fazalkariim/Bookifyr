@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../utils/axios';
 import { AuthContext } from '../context/AuthContext';
@@ -22,7 +22,7 @@ const EventDetail = () => {
                 const { data } = await api.get(`/events/${id}`);
                 setEvent(data);
             } catch (err) {
-                setError('Failed to load event details.');
+                setError('Failed to load event details.',err);
             } finally {
                 setLoading(false);
             }
@@ -65,8 +65,8 @@ const EventDetail = () => {
 
     return (
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden mt-8">
-            {event.image ? (
-                <img src={event.image} alt={event.title} className="w-full h-80 object-cover" />
+            {event.imageUrl ? (
+                <img src={event.imageUrl} alt={event.title} className="w-full h-80 object-cover" />
             ) : (
                 <div className="w-full h-64 bg-gray-900 flex items-center justify-center text-white/50 text-6xl font-black uppercase tracking-widest">
                     {event.category}
@@ -93,7 +93,7 @@ const EventDetail = () => {
                                 </div>
                                 <div>
                                     <p className="text-sm font-semibold text-gray-400 uppercase">Ticket Price</p>
-                                    <p className="font-bold text-gray-800 text-lg">{event.ticketPrice === 0 ? <span className="text-green-500">Free</span> : `₹${event.ticketPrice}`}</p>
+                                    <p className="font-bold text-gray-800 text-lg">{event.ticketPrice === 0 ? <span className="text-green-500">Free</span> : `Rs ${event.ticketPrice}`}</p>
                                 </div>
                             </div>
 

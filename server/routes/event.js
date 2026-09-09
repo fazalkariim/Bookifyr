@@ -17,6 +17,6 @@ router.post("/",protect,admin, createEvent);
 router.put("/:id",protect,admin, updateEvent);
 
 //Delete Events(admin only)
-router.put("/:id",protect,admin, deleteEvent);
+router.delete("/:id",protect,admin, deleteEvent);
 
 export default router

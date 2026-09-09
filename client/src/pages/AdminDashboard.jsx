@@ -12,8 +12,15 @@ const AdminDashboard = () => {
 
     const [showEventForm, setShowEventForm] = useState(false);
     const [formData, setFormData] = useState({
-        title: '', description: '', date: '', location: '', category: '', totalSeats: '', ticketPrice: '', image: ''
-    });
+    title: '',
+    description: '',
+    date: '',
+    location: '',
+    category: '',
+    totalSeats: '',
+    ticketPrice: '',
+    imageUrl: ''
+});
 
     useEffect(() => {
         if (!user || user.role !== 'admin') {
@@ -43,7 +50,7 @@ const AdminDashboard = () => {
         try {
             await api.post('/events', formData);
             setShowEventForm(false);
-            setFormData({ title: '', description: '', date: '', location: '', category: '', totalSeats: '', ticketPrice: '', image: '' });
+            setFormData({ title: '', description: '', date: '', location: '', category: '', totalSeats: '', ticketPrice: '', imageUrl: '' });
             fetchData();
         } catch (error) {
             alert(error.response?.data?.message || 'Error creating event');
@@ -103,9 +110,9 @@ const AdminDashboard = () => {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
                         <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Total Revenue</p>
-                        <h3 className="text-3xl font-black text-green-600">₹{bookings.reduce((sum, b) => b.paymentStatus === 'paid' && b.status === 'confirmed' ? sum + b.amount : sum, 0)}</h3>
+                        <h3 className="text-3xl font-black text-green-600">Rs.{bookings.reduce((sum, b) => b.paymentStatus === 'paid' && b.status === 'confirmed' ? sum + b.amount : sum, 0)}</h3>
                     </div>
-                    <div className="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-xl font-bold">₹</div>
+                    <div className="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-xl font-bold">RS</div>
                 </div>
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
@@ -135,7 +142,7 @@ const AdminDashboard = () => {
                         <input required type="number" placeholder="Ticket Price (0 for free)" className="border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition" value={formData.ticketPrice} onChange={e => setFormData({ ...formData, ticketPrice: e.target.value })} />
 
                         <div className="md:col-span-2">
-                            <input type="text" placeholder="Image URL (Provide any direct link to an image)" className="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition" value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} />
+                            <input type="text" placeholder="Image URL (Provide any direct link to an image)" className="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-gray-700 outline-none transition" value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} />
                         </div>
 
                         <textarea required placeholder="Event Description" className="border px-4 py-3 rounded-lg md:col-span-2 h-32 focus:ring-2 focus:ring-gray-700 outline-none transition" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
@@ -199,7 +206,7 @@ const AdminDashboard = () => {
                                             </p>
                                             <p className="text-gray-700 flex items-center gap-2 mb-1">
                                                 <span className="font-bold w-16 text-gray-500 uppercase text-xs">Amount:</span>
-                                                <span className={`font-semibold ${booking.amount === 0 ? 'text-green-600' : ''}`}>{booking.amount === 0 ? 'Free' : `₹${booking.amount}`}</span>
+                                                <span className={`font-semibold ${booking.amount === 0 ? 'text-green-600' : ''}`}>{booking.amount === 0 ? 'Free' : `Rs ${booking.amount}`}</span>
                                             </p>
                                             <p className="text-gray-700 flex items-center gap-2 mb-1">
                                                 <span className="font-bold w-16 text-gray-500 uppercase text-xs">Date:</span>
